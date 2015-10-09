@@ -1,5 +1,6 @@
 set nocompatible
 filetype off
+set runtimepath+=/usr/share/lilypond/2.18.2/vim/
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -16,6 +17,12 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'fatih/vim-go'
+Plugin 'kovisoft/slimv'
+Plugin 'tpope/vim-fireplace'
+Plugin 'rust-lang/rust.vim'
+Plugin 'rdnetto/YCM-Generator'
+Plugin 'wannesm/wmnusmv.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -51,7 +58,6 @@ set incsearch		" do incremental searching
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
 
-execute pathogen#infect()
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -71,7 +77,10 @@ if &t_Co > 2 || has("gui_running")
     syntax on
     set hlsearch
     set background=dark
-    colorscheme solarized
+    colorscheme molokai
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=r
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -122,6 +131,7 @@ set shiftwidth=4
 "Java anonymous classes. Sometimes, you have to use them.
 set cinoptions+=j1
 set softtabstop=4
+set tabstop=4
 set expandtab
 set laststatus=2
 set number
@@ -139,7 +149,7 @@ if exists("+undofile")
   set undodir+=~/.vim/undo//
   set undofile
 endif
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
@@ -158,3 +168,5 @@ let g:LatexBox_latexmk_async = 1
 let g:syntastic_python_checkers=[]
 
 let g:jsx_ext_required = 0
+
+nnoremap <leader>gd :YcmCompleter GoTo<cr>
